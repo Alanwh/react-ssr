@@ -1,0 +1,9 @@
+.couter{
+    padding: 30px;
+    background: #f3f3f3;
+}
+.btns-container button{
+    padding: 5px 10px;
+    margin:  10px 20px;
+    background: #fff;
+}

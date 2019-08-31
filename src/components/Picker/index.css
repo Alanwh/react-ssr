@@ -1,0 +1,13 @@
+.default-select{
+    border: 1px solid #e6e6e6;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+.picker-lists div{
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #e6e6e6;
+}
+.picker-lists div+div{
+    border-top: none;
+}

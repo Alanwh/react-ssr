@@ -1,4 +1,6 @@
 import React from 'react';
+import {requestDest} from '../../service';
+import fetchJsonp from 'fetch-jsonp';
 import './index.css';
 
 class Posts extends React.Component{
@@ -8,19 +10,16 @@ class Posts extends React.Component{
     }
 
     componentDidMount() {
-        fetch('/api/restapi/soa2/14422/displayWindow', {
-            method: 'POST',
-            body: JSON.stringify({startCity: 59, siteID: 1, version: "B", catgoryID: 2, tabID: 100041})
-        }).then((res)=>{
-            if(res.ok) {
-                return res.json();
-            }
-        }).then((data)=>{
-            const list = data.displayWindowModels[0].tabList.filter(tab => tab.tabID!== 0);
+        requestDest().then((data) => {
             this.setState({
-                list: list
+                list: data.displayWindowModels[0].tabList
             })
-        }).catch((e)=>console.log("e is" , e))
+        })
+
+    fetchJsonp('http://localhost:8888/jsonp', {jsonpCallback: 'custom_callback'})
+        .then((res)=>res.json())
+        .then((json)=>console.log(json))
+        .catch((ex) => console.log('parsing failed', ex))
     }
 
     render() {

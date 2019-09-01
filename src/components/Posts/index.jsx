@@ -1,6 +1,7 @@
 import React from 'react';
 import {requestDest} from '../../service';
 import fetchJsonp from 'fetch-jsonp';
+import MyPromise from '../../common/utils/myPromise'
 import './index.css';
 
 class Posts extends React.Component{
@@ -16,10 +17,21 @@ class Posts extends React.Component{
             })
         })
 
-    fetchJsonp('http://localhost:8888/jsonp', {jsonpCallback: 'custom_callback'})
-        .then((res)=>res.json())
-        .then((json)=>console.log(json))
-        .catch((ex) => console.log('parsing failed', ex))
+        fetchJsonp('http://localhost:8888/jsonp', {jsonpCallback: 'custom_callback'})
+            .then((res)=>res.json())
+            .then((json)=>console.log(json))
+            .catch((ex) => console.log('parsing failed', ex))
+
+        new MyPromise((resolve, reject)=>{
+            console.log('开始执行excutor~~~~~~~');
+            setTimeout(() => {
+               console.log('结束执行excutor~~~~~~~');
+               resolve('ok~');
+            }, 1000);
+        }).then((data)=>{
+            console.log('执行then方法');
+            console.log(data)
+        })
     }
 
     render() {
